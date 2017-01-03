@@ -12,11 +12,14 @@ let articleCount = 1
 let data = ''
 
 let buffer = '';
-let rs = fs.createReadStream('enwiki-20161101-pagelinks.sql');
+let rs = fs.createReadStream('enwiki-latest-pagelinks.sql');
 rs.on('data', (chunk) => {
   let lines = (buffer + chunk).split(/\r?\n/g);
   buffer = lines.pop();
   for (let i = 0; i < lines.length; ++i) {
+
+    fs.appendFileSync('pagelinksSample.txt', lines[i] + '\n')
+
     if(j > 41) {
       // console.log(lines[i] + '\n');
       let edgeRegex = /\(\d*,0,'([^,]*?)',0\)[,|;]/g
@@ -36,6 +39,7 @@ rs.on('data', (chunk) => {
           data = ''
         }
 
+        process.exit()
 
         // console.log(source + ', ' + terget);
       })

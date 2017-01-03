@@ -38,4 +38,5 @@ jspm_packages
 
 edges.txt
 uniqueEdges.txt
-.sql
+*.sql
+*.gz
